@@ -1,5 +1,4 @@
 from yandex_music.client import Client
-import yandex_music
 
 class Parser_Yandex_Music:
     def __init__(self, login, password):

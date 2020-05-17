@@ -6,13 +6,10 @@ This crazy bot will help you parse all your favorite music from Yandex and add i
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the necessary packages for python:
 
-```bash
-pip install pyautogui
-pip install textblob
-pip install win32api
-pip install ctypes
-pip install yandex_music
 ```
+pip install -r requirements.txt --upgrade
+```
+(if you don't have one, it will be automatically installed)
 
 And just make a gitclone this repository in a convenient place. After, open it with any text editor and correct the yandex_mail and password.
 
