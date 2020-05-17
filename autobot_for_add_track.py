@@ -1,8 +1,6 @@
 from time import sleep
 import pyautogui
 from textblob import TextBlob
-import win32api
-import ctypes
 from parser_yandex_music import Parser_Yandex_Music
 
 # add your yandex account for parser
