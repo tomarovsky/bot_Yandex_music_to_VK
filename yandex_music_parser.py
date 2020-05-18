@@ -1,6 +1,6 @@
 from yandex_music.client import Client
 
-class Parser_Yandex_Music:
+class YandexMusicParser:
     def __init__(self, login, password):
         self.login = login
         self.password = password
