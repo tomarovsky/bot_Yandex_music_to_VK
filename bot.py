@@ -19,14 +19,14 @@ SWITCH_LANGUAGE_ENG = (1835, 919)
 # used to determine the location of the cursor
 screenWidth, screenHeight = pyautogui.size()
 x, y = pyautogui.position()
-print(x, y)
+print((x, y))
 
 def open_browser():
     print("Opening Google Chrome browser")
     pyautogui.click(CHROME_ICON)
     sleep(1)
 
-def add_track(track):
+def add_track(track_fullname):
     sleep(1)
     pyautogui.click(SEARCH)
     sleep(1)
@@ -34,7 +34,7 @@ def add_track(track):
     sleep(1)
     pyautogui.keyDown('backspace')
     sleep(1)
-    pyautogui.typewrite(track)
+    pyautogui.typewrite(track_fullname)
     sleep(1)
     pyautogui.keyDown('enter')
     sleep(1)
@@ -49,39 +49,39 @@ def add_track(track):
         break
     pyautogui.moveTo(start)
     x, y = pyautogui.position()
-    print(x, y)
+    print((x, y))
     ADD_TRACK = (x + 417, y + 74)
     pyautogui.moveTo(ADD_TRACK)
     pyautogui.click(ADD_TRACK)
     sleep(1)
 
-def fix_layout(track_name):
+def fix_layout(track_fullname):
     eng_chars = u"~!@#$%^&qwertyuiop[]asdfghjkl;'zxcvbnm,./QWERTYUIOP{}ASDFGHJKL:\"|ZXCVBNM<>?"
     rus_chars = u"ё!\"№;%:?йцукенгшщзхъфывапролджэячсмитьбю.ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭ/ЯЧСМИТЬБЮ,"
     trans_table = dict(zip(rus_chars, eng_chars))
-    return ''.join([trans_table.get(c, c) for c in track_name])
+    return ''.join([trans_table.get(c, c) for c in track_fullname])
 
 def main():
     data = YandexMusicParser(YANDEX_MAIL, PASSWORD)
-    all_tracks_names = data.parsing_all_tracks()
+    tracks_fullnames = data.tracks_parse()
 
     open_browser()
-    for track_name in all_tracks_names[::-1]:
-        language = TextBlob(track).detect_language()
+    for track_fullname in tracks_fullnames[::-1]:
+        language = TextBlob(track_fullname).detect_language()
         if language == "ru":
             pyautogui.moveTo(SWITCH_LANGUAGE_step1)
             pyautogui.click(SWITCH_LANGUAGE_step1)
             pyautogui.moveTo(SWITCH_LANGUAGE_RUS)
             pyautogui.click(SWITCH_LANGUAGE_RUS)
-            track_name = fix_layout(track_name)
-            add_track(track_name)
+            track_name = fix_layout(track_fullname)
+            add_track(track_fullname)
             continue
         else:
             pyautogui.moveTo(SWITCH_LANGUAGE_step1)
             pyautogui.click(SWITCH_LANGUAGE_step1)
             pyautogui.moveTo(SWITCH_LANGUAGE_ENG)
             pyautogui.click(SWITCH_LANGUAGE_ENG)
-            add_track(track)
+            add_track(track_fullname)
         sleep(1)
         
 main()
