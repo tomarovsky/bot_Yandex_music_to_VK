@@ -46,7 +46,6 @@ def add_track(track_fullname):
         count -= 1
         if count == 0:
             break
-        break
     pyautogui.moveTo(start)
     x, y = pyautogui.position()
     print((x, y))
