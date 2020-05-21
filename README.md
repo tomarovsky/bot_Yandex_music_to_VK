@@ -14,7 +14,7 @@ All you need to do is:
 
 1. Place the browser as shown in the picture:  
 ![Screenshot](images/for_readme.png)
-2. Open VK music in the browser and run the script. Don't touch the mouse! Just watch.
+2. Open VK music in the browser and run the 'bot.py' script. Don't touch the mouse! Just watch.
 
 If you don't have a Full HD monitor, you will need to change the coordinates in the script manually :(  
 (or buy a Full HD monitor for this program :D)
