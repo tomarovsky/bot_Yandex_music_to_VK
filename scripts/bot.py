@@ -1,7 +1,7 @@
 from time import sleep
 import pyautogui
 from textblob import TextBlob
-from parser_yandex_music import YandexMusicParser
+from yandex_music_parser import YandexMusicParser
 
 # add your Yandex mail, password and full link to your VK music page
 YANDEX_MAIL = "*@yandex.com"
@@ -46,7 +46,6 @@ def add_track(track_fullname):
         count -= 1
         if count == 0:
             break
-        break
     pyautogui.moveTo(start)
     x, y = pyautogui.position()
     print((x, y))
@@ -61,9 +60,9 @@ def fix_layout(track_fullname):
     trans_table = dict(zip(rus_chars, eng_chars))
     return ''.join([trans_table.get(c, c) for c in track_fullname])
 
-def main():
+if __name__ == "__main__":
     data = YandexMusicParser(YANDEX_MAIL, PASSWORD)
-    tracks_fullnames = data.tracks_parse()
+    tracks_fullnames = data.parse_tracks()
 
     open_browser()
     for track_fullname in tracks_fullnames[::-1]:
@@ -73,8 +72,7 @@ def main():
             pyautogui.click(SWITCH_LANGUAGE_step1)
             pyautogui.moveTo(SWITCH_LANGUAGE_RUS)
             pyautogui.click(SWITCH_LANGUAGE_RUS)
-            track_name = fix_layout(track_fullname)
-            add_track(track_fullname)
+            add_track(fix_layout(track_fullname))
             continue
         else:
             pyautogui.moveTo(SWITCH_LANGUAGE_step1)
@@ -83,6 +81,3 @@ def main():
             pyautogui.click(SWITCH_LANGUAGE_ENG)
             add_track(track_fullname)
         sleep(1)
-        
-main()
-        
